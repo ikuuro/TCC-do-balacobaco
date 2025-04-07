@@ -12,10 +12,16 @@ header {
     font-weight: bold;
     background: rgba(0, 0, 0, 0.2);
 }
+
 img {
     filter: drop-shadow(0 0 30px rgb(96, 199, 255));
     display: flex;
     justify-content: left;
+}
+.botoes{
+    display: flex;
+    justify-content: end;
+    gap: 10px;
 }
 .login {
     background-color: aliceblue;
@@ -26,12 +32,29 @@ img {
     font-size: 18px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
+    gap: 10px;
     filter: drop-shadow(0 0 20px rgba(96, 199, 255, 0.8)); /* Brilho inicial */
-    display: flex;
-    justify-content: right;
 }
 
 .login:hover {
+    filter: drop-shadow(0 0 40px rgba(96, 199, 255, 1));
+    transform: scale(1.05);
+}
+
+.cadastro {
+    background-color: aliceblue;
+    color: black;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    cursor: pointer;
+    gap: 10px;
+    transition: 0.3s ease-in-out;
+    filter: drop-shadow(0 0 20px rgba(96, 199, 255, 0.8)); /* Brilho inicial */
+}
+
+.cadastro:hover {
     filter: drop-shadow(0 0 40px rgba(96, 199, 255, 1));
     transform: scale(1.05);
 }
