@@ -1,0 +1,85 @@
+package projeto.tcc.skillcode.model;
+
+public class Usuario {
+
+    private Integer id;
+    private String nome;
+    private String email;
+    private String login;
+    private String senha;
+    private String telefone;
+    private Integer pontuacao;
+
+    public Usuario(){}
+
+    public Usuario(String nome, String email, String login, String senha){
+        this.nome = nome;
+        this.email = email;
+        this.login = login;
+        this.senha = senha;
+    }
+
+    public Usuario(Integer id, String nome, String email, String login, String senha, String telefone, Integer pontuacao){
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.login = login;
+        this.senha = senha;
+        this.telefone = telefone;
+        this.pontuacao = pontuacao;
+    }
+
+    public Integer getId(){
+        return id;
+    }
+    
+    public String getNome() {
+        return nome;
+    }
+    
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public String getLogin() {
+        return login;
+    }
+    
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    
+    public String getSenha() {
+        return senha;
+    }
+    
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
+    public String getTelefone() {
+        return telefone;
+    }
+    
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+    
+    public Integer getPontuacao() {
+        return pontuacao;
+    }
+    
+    public void setPontuacao(Integer pontuacao) {
+        this.pontuacao = pontuacao;
+    }
+    
+
+}
