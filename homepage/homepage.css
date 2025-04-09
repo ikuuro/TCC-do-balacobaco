@@ -11,18 +11,32 @@ header {
     font-size: 2em;
     font-weight: bold;
     background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* <- esse faz a mágica */
+    border-radius: 0 0 40px 40px;
 }
+
+.navbar-content {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 autso;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 img {
     filter: drop-shadow(0 0 30px rgb(96, 199, 255));
-    display: flex;
+    display: block;
     justify-content: left;
 }
-.botoes{
+.botoes {
     display: flex;
-    justify-content: end;
-    gap: 10px;
-}
+    gap: 1rem;
+  }
+
 .login {
     background-color: aliceblue;
     color: black;
@@ -67,6 +81,10 @@ img {
 }
 
 .login:active {
+    animation: glowing 1.5s infinite alternate;
+}
+
+.cadastro:active {
     animation: glowing 1.5s infinite alternate;
 }
 
