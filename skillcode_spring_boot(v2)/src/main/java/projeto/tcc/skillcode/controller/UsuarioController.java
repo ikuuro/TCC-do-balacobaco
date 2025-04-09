@@ -26,35 +26,30 @@ public class UsuarioController {
         return "usuarios/form";
     }
 
-    // Display all usuarios
     @GetMapping
     public String listUsuarios(Model model) {
         model.addAttribute("usuarios", usuarioRepository.findAll());
         return "usuarios/list";
     }
 
-    // Show create form
     @GetMapping("/new")
     public String showCreateForm(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "usuarios/form";
     }
 
-    // Save new usuario
     @PostMapping("/save")
     public String saveUsuario(@ModelAttribute Usuario usuario) {
         usuarioRepository.save(usuario);
         return "redirect:/usuarios";
     }
 
-    // Show edit form
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model) {
         model.addAttribute("usuario", usuarioRepository.findById(id));
         return "usuarios/form";
     }
 
-    // Update usuario
     @PostMapping("/update/{id}")
     public String updateUsuario(@PathVariable int id, @ModelAttribute Usuario usuario) {
         usuario.setId(id);
@@ -62,7 +57,6 @@ public class UsuarioController {
         return "redirect:/usuarios";
     }
 
-    // Delete usuario
     @GetMapping("/delete/{id}")
     public String deleteUsuario(@PathVariable int id) {
         usuarioRepository.deleteById(id);
