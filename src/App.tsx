@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Star, Trophy, Zap } from 'lucide-react';
 import { LevelSelection } from './components/LevelSelection';
 import { Question } from './components/Question';
@@ -16,8 +16,31 @@ function App() {
     gameFinished: false,
   });
 
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [answers, setAnswers] = useState<(number | null)[]>([]);
   const [showExplanation, setShowExplanation] = useState(false);
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [elapsedTime, setElapsedTime] = useState<number>(0);
+
+  const currentIndex = gameState.currentQuestionIndex;
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (gameState.gameStarted && !gameState.gameFinished) {
+      interval = setInterval(() => {
+        setElapsedTime(Date.now() - (startTime ?? Date.now()));
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [gameState.gameStarted, gameState.gameFinished, startTime]);
+
+  const formatTime = (milliseconds: number) => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+    const seconds = (totalSeconds % 60).toString().padStart(2, '0');
+    return `${minutes}:${seconds}`;
+  };
 
   const handleLevelSelect = (level: 'junior' | 'pleno' | 'senior') => {
     const levelQuestions = questions.filter(q => q.level === level);
@@ -27,32 +50,47 @@ function App() {
       questions: levelQuestions,
       gameStarted: true,
     });
+    setAnswers(Array(levelQuestions.length).fill(null));
+    setStartTime(Date.now());
+    setElapsedTime(0);
   };
 
   const handleAnswer = (answerIndex: number) => {
-    setSelectedAnswer(answerIndex);
-    setShowExplanation(true);
+    const currentQuestion = gameState.questions[currentIndex];
+    const updatedAnswers = [...answers];
+    updatedAnswers[currentIndex] = answerIndex;
+    setAnswers(updatedAnswers);
 
-    const currentQuestion = gameState.questions[gameState.currentQuestionIndex];
-    if (answerIndex === currentQuestion.correctAnswer) {
+    if (
+      answers[currentIndex] === null &&
+      answerIndex === currentQuestion.correctAnswer
+    ) {
       setGameState(prev => ({ ...prev, score: prev.score + 1 }));
     }
 
-    // avanço de tempo tava aqui bebelas
+    setShowExplanation(true);
   };
 
   const handleNextQuestion = () => {
-    if (gameState.currentQuestionIndex === gameState.questions.length - 1) {
+    if (currentIndex === gameState.questions.length - 1) {
       setGameState(prev => ({ ...prev, gameFinished: true }));
     } else {
       setGameState(prev => ({
         ...prev,
         currentQuestionIndex: prev.currentQuestionIndex + 1,
       }));
+      setShowExplanation(answers[currentIndex + 1] !== null);
     }
+  };
 
-    setSelectedAnswer(null);
-    setShowExplanation(false);
+  const handlePreviousQuestion = () => {
+    if (currentIndex > 0) {
+      setGameState(prev => ({
+        ...prev,
+        currentQuestionIndex: prev.currentQuestionIndex - 1,
+      }));
+      setShowExplanation(answers[currentIndex - 1] !== null);
+    }
   };
 
   const handleRestart = () => {
@@ -64,8 +102,10 @@ function App() {
       gameStarted: false,
       gameFinished: false,
     });
-    setSelectedAnswer(null);
+    setAnswers([]);
     setShowExplanation(false);
+    setStartTime(null);
+    setElapsedTime(0);
   };
 
   return (
@@ -75,7 +115,7 @@ function App() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Zap className="w-10 h-10 text-[#00FFFF]" />
-              <h1 className="text-4xl font-bold neon-text">SkillCode</h1>
+              <button onClick={handleRestart}><h1 className="text-4xl font-bold neon-text">SkillCode</h1></button>
             </div>
             {gameState.gameStarted && !gameState.gameFinished && (
               <div className="flex items-center gap-6">
@@ -84,7 +124,10 @@ function App() {
                   <span className="text-[#39FF14] font-bold">{gameState.score}</span>
                 </div>
                 <div className="text-gray-300">
-                  {gameState.currentQuestionIndex + 1} / {gameState.questions.length}
+                  {currentIndex + 1} / {gameState.questions.length}
+                </div>
+                <div className="text-[#00FFFF] font-mono text-sm">
+                  ⏱️ {formatTime(elapsedTime)}
                 </div>
               </div>
             )}
@@ -109,13 +152,14 @@ function App() {
 
         {gameState.gameStarted && !gameState.gameFinished && (
           <Question
-            question={gameState.questions[gameState.currentQuestionIndex]}
+            question={gameState.questions[currentIndex]}
             onAnswer={handleAnswer}
             showExplanation={showExplanation}
-            selectedAnswer={selectedAnswer}
-            currentQuestion={gameState.currentQuestionIndex + 1}
+            selectedAnswer={answers[currentIndex]}
+            currentQuestion={currentIndex + 1}
             totalQuestions={gameState.questions.length}
-            onNext={handleNextQuestion} // <- aqui está a mágica
+            onNext={handleNextQuestion}
+            onPrevious={handlePreviousQuestion}
           />
         )}
 
@@ -124,6 +168,7 @@ function App() {
             score={gameState.score}
             totalQuestions={gameState.questions.length}
             onRestart={handleRestart}
+            elapsedTime={Math.floor(elapsedTime / 1000)}
           />
         )}
       </main>
