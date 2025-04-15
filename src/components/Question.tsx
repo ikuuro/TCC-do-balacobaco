@@ -5,10 +5,11 @@ import { ProgressBar } from './ProgressBar';
 interface QuestionProps {
   question: QuestionType;
   onAnswer: (answerIndex: number) => void;
-  showExplanation: boolean;
+  showExplanation: boolean; 
   selectedAnswer: number | null;
   currentQuestion: number;
   totalQuestions: number;
+  onNext: () => void;
 }
 
 export function Question({ 
@@ -17,7 +18,8 @@ export function Question({
   showExplanation, 
   selectedAnswer,
   currentQuestion,
-  totalQuestions
+  totalQuestions,
+  onNext 
 }: QuestionProps) {
   return (
     <div className="max-w-3xl mx-auto p-6">
@@ -34,7 +36,7 @@ export function Question({
               key={index}
               onClick={() => onAnswer(index)}
               disabled={showExplanation}
-              className={`w-full p-4 text-left rounded-lg transition-all duration-300 ${
+              className={`w-full p-4 text-left rounded-lg transition-all duration-999999999999 ${
                 showExplanation
                   ? index === question.correctAnswer
                     ? 'correct-answer'
@@ -62,6 +64,22 @@ export function Question({
                 <code className="text-[#00FFFF]">{question.demonstration.code}</code>
               </pre>
               <p className="mt-4 text-gray-300">{question.demonstration.description}</p>
+            </div>
+
+            
+
+
+
+
+
+
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={onNext}
+                className="bg-[#00FFFF] text-black font-bold px-6 py-3 rounded-lg hover:bg-opacity-80 transition"
+              >
+                Avançar
+              </button>
             </div>
           </div>
         )}

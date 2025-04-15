@@ -38,18 +38,21 @@ function App() {
       setGameState(prev => ({ ...prev, score: prev.score + 1 }));
     }
 
-    setTimeout(() => {
-      if (gameState.currentQuestionIndex === gameState.questions.length - 1) {
-        setGameState(prev => ({ ...prev, gameFinished: true }));
-      } else {
-        setGameState(prev => ({
-          ...prev,
-          currentQuestionIndex: prev.currentQuestionIndex + 1,
-        }));
-        setSelectedAnswer(null);
-        setShowExplanation(false);
-      }
-    }, 3000);
+    // avanço de tempo tava aqui bebelas
+  };
+
+  const handleNextQuestion = () => {
+    if (gameState.currentQuestionIndex === gameState.questions.length - 1) {
+      setGameState(prev => ({ ...prev, gameFinished: true }));
+    } else {
+      setGameState(prev => ({
+        ...prev,
+        currentQuestionIndex: prev.currentQuestionIndex + 1,
+      }));
+    }
+
+    setSelectedAnswer(null);
+    setShowExplanation(false);
   };
 
   const handleRestart = () => {
@@ -112,6 +115,7 @@ function App() {
             selectedAnswer={selectedAnswer}
             currentQuestion={gameState.currentQuestionIndex + 1}
             totalQuestions={gameState.questions.length}
+            onNext={handleNextQuestion} // <- aqui está a mágica
           />
         )}
 
