@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>User List</h1>
+        <table class="table" id="userTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/v1/usuarios')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('#userTable tbody');
+                    data.forEach(user => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${user.id}</td>
+                            <td>${user.nome}</td>
+                            <td>${user.email}</td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" 
+                                    onclick="editUser(${user.id})">Edit</button>
+                                <button class="btn btn-sm btn-danger" 
+                                    onclick="deleteUser(${user.id})">Delete</button>
+                            </td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                });
+        });
+
+        function editUser(id) {
+            window.location.href = `/edit-user.html?id=${id}`;
+        }
+
+        function deleteUser(id) {
+            if (confirm('Are you sure?')) {
+                fetch(`/api/v1/usuarios/${id}`, { method: 'DELETE' })
+                    .then(() => window.location.reload());
+            }
+        }
+    </script>
+</body>
+</html>
