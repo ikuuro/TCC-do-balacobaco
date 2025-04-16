@@ -8,7 +8,9 @@
     --table-border: 2px solid var(--primary-color);
 }
 
-
+html, body {
+    height: 100%;
+}
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
