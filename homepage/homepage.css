@@ -15,7 +15,7 @@ html, body {
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 0 0 60px 0;
+    padding: 0;
     background: var(--bg-gradient);
     color: var(--text-color);
     min-height: 100vh;
@@ -24,19 +24,18 @@ body {
 }
 
 header {
-    position: sticky;  /* Torna a navbar fixa */
-    top: 0;           /* Fixa no topo da viewport */
-    z-index: 1000;    /* Garante que fique acima de outros elementos */
-    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 15px 0;
     background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);      /* Efeito de desfoque no conteúdo por trás */
-    /* Mantenha o restante das suas propriedades existentes */
+    backdrop-filter: blur(10px);
     border-radius: 0 0 40px 40px;
-    transition: all 0.3s ease;       /* Transição suave para efeitos */
+    transition: all 0.3s ease;
 }
 
 body.scrolled header {
-    padding: 15px 0;
+    padding: 10px 0;
     background: rgba(5, 6, 94, 0.904);
     box-shadow: 0 2px 20px rgba(0, 255, 255, 0.3);
 }
@@ -48,13 +47,15 @@ body.scrolled header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 40px;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .logo {
+    width: 150px;
+    height: auto;
     filter: drop-shadow(0 0 30px var(--btn-glow));
     transition: transform 0.3s ease;
-    display: block;
 }
 
 .logo:hover {
@@ -69,14 +70,15 @@ body.scrolled header {
 .btn {
     background-color: aliceblue;
     color: black;
-    padding: 15px 30px;
+    padding: 12px 25px;
     border: none;
     border-radius: 50px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
     filter: drop-shadow(0 0 20px var(--btn-glow));
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .btn:hover {
@@ -84,46 +86,39 @@ body.scrolled header {
     transform: scale(1.05);
 }
 
-@keyframes glowing {
-    0% { filter: drop-shadow(0 0 15px rgba(96, 199, 255, 0.7)); }
-    50% { filter: drop-shadow(0 0 35px rgba(96, 199, 255, 1)); }
-    100% { filter: drop-shadow(0 0 15px rgba(96, 199, 255, 0.7)); }
-}
-
-.btn:active {
-    animation: glowing 1.5s infinite;
-}
-
 .container {
-    padding: 50px 20px;
+    padding: 30px 15px;
     max-width: 1200px;
     margin: 0 auto;
     flex: 1;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 h1, h2 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     text-shadow: 0 0 10px var(--primary-color);
 }
 
 .sobre-box {
-    width: 85%;  /* Aumentei a largura */
-    margin: 0 auto 40px;  /* Aumentei o margin-bottom */
+    width: 90%;
+    margin: 0 auto 30px;
     color: #ffffff;
     border: 2px solid #00ffff;
-    border-radius: 20px;  /* Bordas mais arredondadas */
-    padding: 40px;  /* Padding maior */
-    box-shadow: 0 0 30px #00ffff, 0 0 60px #8000ff inset;  /* Glow mais intenso */
-    font-size: 1.3em;  /* Texto maior */
-    line-height: 1.8;  /* Espaçamento entre linhas maior */
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 0 30px #00ffff, 0 0 60px #8000ff inset;
+    font-size: 1.1em;
+    line-height: 1.6;
     text-align: center;
     position: relative;
     overflow: hidden;
-    min-height: 250px;  /* Altura mínima garantida */
+    min-height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;  /* Centraliza o conteúdo verticalmente */
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 .sobre-box::before {
@@ -140,82 +135,60 @@ h1, h2 {
     background-size: 400%;
     z-index: -1;
     border-radius: 18px;
-    opacity: 0.4;  /* Opacidade aumentada */
+    opacity: 0.4;
     animation: borderGlow 8s linear infinite;
 }
 
+@keyframes borderGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .sobre-box p {
-    margin: 0 0 25px 0;  /* Espaçamento maior entre parágrafos */
-    text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);  /* Sombra mais intensa */
-    font-size: 1.1em;  /* Tamanho de fonte aumentado */
+    margin: 0 0 20px 0;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+    font-size: 1em;
 }
 
 .sobre-box p:last-child {
     margin-bottom: 0;
     font-weight: bold;
     color: #00ffff;
-    text-shadow: 0 0 15px #00ffff;  /* Glow mais forte */
-    font-size: 1.4em;  /* Texto final maior */
-    margin-top: 20px;  /* Espaço extra acima */
+    text-shadow: 0 0 15px #00ffff;
+    font-size: 1.2em;
+    margin-top: 15px;
+    animation: pulse 3s infinite;
 }
 
-/* Adicionei um efeito de pulsação para o último parágrafo */
 @keyframes pulse {
     0% { text-shadow: 0 0 15px #00ffff; }
     50% { text-shadow: 0 0 25px #00ffff, 0 0 10px #ffffff; }
     100% { text-shadow: 0 0 15px #00ffff; }
 }
 
-.sobre-box p:last-child {
-    animation: pulse 3s infinite;
-}
-
-/* Ajuste para telas menores */
-@media (max-width: 768px) {
-    .sobre-box {
-        width: 90%;
-        padding: 30px;
-        min-height: 200px;
-        font-size: 1.1em;
-    }
-    
-    .sobre-box p {
-        font-size: 1em;
-    }
-    
-    .sobre-box p:last-child {
-        font-size: 1.2em;
-    }
-}
-
-.cta {
-    display: block;
-    margin: 0 auto 50px;
-    min-width: 200px;
-}
-
 .ranking-box {
-    width: 90%;
+    width: 95%;
     max-width: 600px;
     margin: 30px auto;
     background: var(--table-bg);
     color: var(--text-color);
     border: var(--table-border);
     border-radius: 15px;
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--secondary-color) inset;
+    box-sizing: border-box;
 }
 
 .ranking-scroll {
     max-height: 400px;
     overflow-y: auto;
     border-radius: 10px;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
-/* Estilização da scrollbar */
 .ranking-scroll::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
 }
 
 .ranking-scroll::-webkit-scrollbar-track {
@@ -231,7 +204,7 @@ h1, h2 {
 .ranking-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .ranking-table th {
@@ -265,41 +238,13 @@ h1, h2 {
 
 footer {
     padding: 15px;
-    bottom: 0;
-    width: 100%;
     background: rgba(0, 0, 0, 0.877);
     text-align: center;
     font-size: 0.9em;
     grid-row: 3;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .navbar-content {
-        padding: 0 20px;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .botoes {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .sobre-box {
-        width: 90%;
-        padding: 15px;
-    }
-
-    .ranking-box {
-        width: 95%;
-        padding: 15px;
-    }
-}
-
 .footer-section {
-    flex: 1;
-    min-width: 200px;
     margin-bottom: 20px;
 }
 
@@ -321,41 +266,13 @@ footer {
 }
 
 .social-icons {
-    display: flex;
-    gap: 15px;
-    font-size: 1.5em;
-    margin: 10px 0;
-}
-
-.newsletter-form {
-    display: flex;
-    gap: 10px;
-}
-
-.newsletter-form input {
-    padding: 10px;
-    border-radius: 50px;
-    border: none;
-    flex: 1;
-}
-
-.newsletter-form button {
-    background: #00ffff;
-    color: #000;
-    border: none;
-    padding: 0 20px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.social-icons {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas de tamanho igual */
-    place-items: center; /* Centraliza horizontal e verticalmente */
-    max-width: 200px; /* Largura máxima do container */
-    margin: 0 auto; 
+    grid-template-columns: repeat(3, 1fr);
+    place-items: center;
+    max-width: 200px;
+    margin: 0 auto;
 }
+
 .legendary-btn {
     position: relative;
     padding: 18px 36px;
@@ -371,26 +288,26 @@ footer {
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
     transition: all 0.3s ease;
     display: block;
-  margin: 0 auto;
-  }
-  
-  .btn-text {
+    margin: 0 auto;
+}
+
+.btn-text {
     position: relative;
     z-index: 2;
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
-  }
-  
-  .glow {
+}
+
+.glow {
     position: absolute;
     top: -50%;
     left: -50%;
     width: 200%;
     height: 200%;
     background: linear-gradient(
-      45deg,
-      rgba(0, 255, 255, 0.7),
-      rgba(255, 0, 255, 0.7),
-      rgba(0, 255, 255, 0.7)
+        45deg,
+        rgba(0, 255, 255, 0.7),
+        rgba(255, 0, 255, 0.7),
+        rgba(0, 255, 255, 0.7)
     );
     background-size: 200% 200%;
     opacity: 0.5;
@@ -398,53 +315,115 @@ footer {
     animation: gradientGlow 3s linear infinite;
     border-radius: 50%;
     filter: blur(20px);
-  }
-  
-  .particles {
+}
+
+.particles {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-image: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.8) 1px,
-      transparent 1px
+        circle,
+        rgba(255, 255, 255, 0.8) 1px,
+        transparent 1px
     );
     background-size: 10px 10px;
     z-index: 0;
     opacity: 0.3;
     animation: particleMove 10s linear infinite;
-  }
-  
-  @keyframes gradientGlow {
+}
+
+@keyframes gradientGlow {
     0% {
-      transform: rotate(0deg);
-      background-position: 0% 50%;
+        transform: rotate(0deg);
+        background-position: 0% 50%;
     }
     100% {
-      transform: rotate(360deg);
-      background-position: 100% 50%;
+        transform: rotate(360deg);
+        background-position: 100% 50%;
     }
-  }
-  
-  @keyframes particleMove {
+}
+
+@keyframes particleMove {
     0% {
-      background-position: 0 0;
+        background-position: 0 0;
     }
     100% {
-      background-position: 100px 100px;
+        background-position: 100px 100px;
     }
-  }
-  
-  .legendary-btn:hover {
+}
+
+.legendary-btn:hover {
     box-shadow: 0 0 30px rgba(0, 255, 255, 0.8),
                 0 0 60px rgba(255, 0, 255, 0.5);
     transform: scale(1.05);
-  }
-  
-  .legendary-btn:active {
+}
+
+.legendary-btn:active {
     transform: scale(0.98);
     box-shadow: 0 0 20px rgba(0, 255, 255, 1),
                 0 0 40px rgba(255, 0, 255, 0.8);
-  }
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .navbar-content {
+        flex-direction: column;
+        gap: 20px;
+        padding: 10px 15px;
+    }
+
+    .logo {
+        width: 120px;
+    }
+
+    .botoes {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .sobre-box {
+        width: 95%;
+        padding: 20px;
+        font-size: 1em;
+    }
+
+    .sobre-box p:last-child {
+        font-size: 1.1em;
+    }
+
+    .ranking-box {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .ranking-table {
+        font-size: 14px;
+    }
+
+    .legendary-btn {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ranking-table th, 
+    .ranking-table td {
+        padding: 8px 10px;
+    }
+
+    .sobre-box {
+        padding: 15px;
+    }
+
+    .footer-section {
+        font-size: 0.8em;
+    }
+}
