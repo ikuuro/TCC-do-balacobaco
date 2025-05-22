@@ -6,7 +6,13 @@ import { GameOver } from './components/GameOver';
 import { questions } from './data/questions';
 import type { GameState } from './types/game';
 
+
+function inicio(){
+  window.open('homepage.html')
+}
+
 function App() {
+  
   const [gameState, setGameState] = useState<GameState>({
     currentLevel: null,
     currentQuestionIndex: 0,
@@ -116,6 +122,9 @@ function App() {
             <div className="flex items-center gap-3">
               <Zap className="w-10 h-10 text-[#00FFFF]" />
               <button onClick={handleRestart}><h1 className="text-4xl font-bold neon-text">SkillCode</h1></button>
+            </div>
+            <div className="flex items-center gap-3">
+              <button onClick={inicio}><h1 className='text-4x1 font-bold neon-text'>Ínicio</h1></button>
             </div>
             {gameState.gameStarted && !gameState.gameFinished && (
               <div className="flex items-center gap-6">
