@@ -1,7 +1,8 @@
+function levelselect() {
+  window.location.href = '../index.html';
 
-function levelselect(){
-window.location.href= './src/main.tsx';
-}
+console.log ("ta sendo apertado");
+};
 
 
         document.querySelector('.logo-link').addEventListener('click', function (e) {

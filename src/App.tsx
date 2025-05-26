@@ -8,8 +8,8 @@ import type { GameState } from './types/game';
 
 
 function inicio(){
-  window.location.href= '../homepage.html'; 
-}
+  window.location.href= './homepage/homepage.html'; 
+};
 
 function App() {
   
