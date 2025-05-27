@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="homepage.css">
     <title>SkillCode</title>
+    <script src="homepage.js"></script>
 </head>
 
 <body>
@@ -31,10 +32,13 @@
             </p>
             <p>Vamos codar juntos? 🚀</p>
         </div>
-        <button class="legendary-btn">
+
+        
+        <button onclick= 'levelselect()' class="legendary-btn">
             <span class="btn-text">Comece aqui</span>
             <span class="glow"></span>
             <span class="particles"></span>
+            
           </button>
 
         <div class="ranking-box">
@@ -134,23 +138,6 @@
             <p>Participe do nosso <a href="#">Discord</a> para tirar dúvidas!</p>
         </div>
     </footer>
-
-    <script>
-
-
-        document.querySelector('.logo-link').addEventListener('click', function (e) {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        window.addEventListener('scroll', function () {
-            if (window.scrollY > 50) {
-                document.body.classList.add('scrolled');
-            } else {
-                document.body.classList.remove('scrolled');
-            }
-        });
-    </script>
 </body>
 
 </html>
