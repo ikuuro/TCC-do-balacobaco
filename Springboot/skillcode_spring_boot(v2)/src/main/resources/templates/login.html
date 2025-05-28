@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; }
+        .login-container { max-width: 350px; margin: 80px auto; background: #fff; padding: 2em; border-radius: 8px; box-shadow: 0 2px 8px #0001; }
+        input { width: 100%; padding: 0.7em; margin: 0.5em 0; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; padding: 0.7em; background: #007bff; color: #fff; border: none; border-radius: 4px; font-size: 1em; }
+        .error { color: #c00; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="login" placeholder="Login" required />
+            <input type="password" id="senha" placeholder="Senha" required />
+            <button type="submit">Entrar</button>
+        </form>
+        <div class="error" id="errorMsg"></div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const login = document.getElementById('login').value;
+            const senha = document.getElementById('senha').value;
+            const res = await fetch('/api/usuarios/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ login, senha })
+            });
+            if (res.ok) {
+                window.location.href = '/'; // Redirect or handle success
+            } else {
+                document.getElementById('errorMsg').textContent = 'Login ou senha inválidos.';
+            }
+        });
+    </script>
+</body>
+</html>

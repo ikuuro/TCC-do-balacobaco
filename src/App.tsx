@@ -5,6 +5,7 @@ import { Question } from './components/Question';
 import { GameOver } from './components/GameOver';
 import { questions } from './data/questions';
 import type { GameState } from './types/game';
+import Login from './components/Login';
 
 
 function inicio(){
@@ -12,7 +13,11 @@ function inicio(){
 };
 
 function App() {
+<<<<<<< HEAD
   
+=======
+  const [user, setUser] = useState<any>(null);
+>>>>>>> main
   const [gameState, setGameState] = useState<GameState>({
     currentLevel: null,
     currentQuestionIndex: 0,
@@ -24,6 +29,7 @@ function App() {
 
   const [answers, setAnswers] = useState<(number | null)[]>([]);
   const [showExplanation, setShowExplanation] = useState(false);
+<<<<<<< HEAD
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
 
@@ -47,9 +53,17 @@ function App() {
     const seconds = (totalSeconds % 60).toString().padStart(2, '0');
     return `${minutes}:${seconds}`;
   };
+=======
+  const [showLogin, setShowLogin] = useState(false);
+>>>>>>> main
 
   const handleLevelSelect = (level: 'junior' | 'pleno' | 'senior') => {
-    const levelQuestions = questions.filter(q => q.level === level);
+    const levelQuestions = questions
+      .filter(q => q.level === level)
+      .map(q => ({
+        ...q,
+        options: [...q.options],
+      }));
     setGameState({
       ...gameState,
       currentLevel: level,
@@ -73,8 +87,11 @@ function App() {
     ) {
       setGameState(prev => ({ ...prev, score: prev.score + 1 }));
     }
+<<<<<<< HEAD
 
     setShowExplanation(true);
+=======
+>>>>>>> main
   };
 
   const handleNextQuestion = () => {
@@ -114,6 +131,10 @@ function App() {
     setElapsedTime(0);
   };
 
+  if (showLogin || !user) {
+    return <Login onLogin={u => { setUser(u); setShowLogin(false); }} />;
+  }
+
   return (
     <div className="min-h-screen grid-background">
       <header className="bg-black bg-opacity-50 backdrop-blur-sm border-b border-[#00FFFF]">
@@ -126,6 +147,13 @@ function App() {
             <div className="flex items-center gap-3">
               <button onClick={inicio}><h1 className='text-4x1 font-bold neon-text'>Ínicio</h1></button>
             </div>
+            <button
+              className="px-4 py-2 rounded bg-[#00FFFF] text-black font-bold shadow hover:bg-[#39FF14] transition"
+              onClick={() => setShowLogin(true)}
+              style={{ marginLeft: 16 }}
+            >
+              Login
+            </button>
             {gameState.gameStarted && !gameState.gameFinished && (
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2">
