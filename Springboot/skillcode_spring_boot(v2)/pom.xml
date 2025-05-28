@@ -6,11 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.4</version>
-<<<<<<< HEAD
-        <relativePath/> <!-- lookup parent from repository -->
-=======
         <relativePath/>
->>>>>>> main
     </parent>
     <groupId>projeto.tcc</groupId>
     <artifactId>skillcode_spring_boot</artifactId>
@@ -71,8 +67,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<<<<<<< HEAD
-=======
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
@@ -81,7 +75,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
->>>>>>> main
     </dependencies>
 
     <build>
