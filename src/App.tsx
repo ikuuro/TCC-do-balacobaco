@@ -5,8 +5,10 @@ import { Question } from './components/Question';
 import { GameOver } from './components/GameOver';
 import { questions } from './data/questions';
 import type { GameState } from './types/game';
+import Login from './components/Login';
 
 function App() {
+  const [user, setUser] = useState<any>(null);
   const [gameState, setGameState] = useState<GameState>({
     currentLevel: null,
     currentQuestionIndex: 0,
@@ -18,9 +20,15 @@ function App() {
 
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const handleLevelSelect = (level: 'junior' | 'pleno' | 'senior') => {
-    const levelQuestions = questions.filter(q => q.level === level);
+    const levelQuestions = questions
+      .filter(q => q.level === level)
+      .map(q => ({
+        ...q,
+        options: [...q.options],
+      }));
     setGameState({
       ...gameState,
       currentLevel: level,
@@ -37,8 +45,6 @@ function App() {
     if (answerIndex === currentQuestion.correctAnswer) {
       setGameState(prev => ({ ...prev, score: prev.score + 1 }));
     }
-
-    // avanço de tempo tava aqui bebelas
   };
 
   const handleNextQuestion = () => {
@@ -68,6 +74,10 @@ function App() {
     setShowExplanation(false);
   };
 
+  if (showLogin || !user) {
+    return <Login onLogin={u => { setUser(u); setShowLogin(false); }} />;
+  }
+
   return (
     <div className="min-h-screen grid-background">
       <header className="bg-black bg-opacity-50 backdrop-blur-sm border-b border-[#00FFFF]">
@@ -77,6 +87,13 @@ function App() {
               <Zap className="w-10 h-10 text-[#00FFFF]" />
               <h1 className="text-4xl font-bold neon-text">SkillCode</h1>
             </div>
+            <button
+              className="px-4 py-2 rounded bg-[#00FFFF] text-black font-bold shadow hover:bg-[#39FF14] transition"
+              onClick={() => setShowLogin(true)}
+              style={{ marginLeft: 16 }}
+            >
+              Login
+            </button>
             {gameState.gameStarted && !gameState.gameFinished && (
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2">
