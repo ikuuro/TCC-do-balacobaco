@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
-=======
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
->>>>>>> main
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -28,19 +25,14 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository repo;
 
-<<<<<<< HEAD
-=======
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
->>>>>>> main
     @GetMapping
     public List<Usuario> getUsuarios(){
         return repo.findAll();
     }
 
-<<<<<<< HEAD
-=======
     @PostMapping("/create")
     public ResponseEntity<Usuario> createAccount(@RequestBody Usuario usuario) {
         String sql = "INSERT INTO usuarios (nome, email, login, senha) VALUES (?, ?, ?, SHA2(?, 256))";
@@ -108,5 +100,4 @@ public class UsuarioController {
         }
     }
 
->>>>>>> main
 }
