@@ -1,3 +1,4 @@
+
 :root {
     --primary-color: #00ffff;
     --secondary-color: #8000ff;
@@ -16,11 +17,14 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background: var(--bg-gradient);
+   background-color: #000;
+   background-image:
+    linear-gradient(0deg, rgba(0, 255, 255, 0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.4) 1px, transparent 1px);
     color: var(--text-color);
     min-height: 100vh;
     display: grid;
-    grid-template-rows: auto 1fr auto;
+
 }
 
 header {
@@ -36,7 +40,7 @@ header {
 
 body.scrolled header {
     padding: 10px 0;
-    background: rgba(5, 6, 94, 0.904);
+    background: rgba(0, 0, 0, 0.457);
     box-shadow: 0 2px 20px rgba(0, 255, 255, 0.3);
 }
 
@@ -96,6 +100,7 @@ body.scrolled header {
 }
 
 h1, h2 {
+    font-family: "Bungee", sans-serif;
     text-align: center;
     margin-bottom: 25px;
     text-shadow: 0 0 10px var(--primary-color);
@@ -105,10 +110,10 @@ h1, h2 {
     width: 90%;
     margin: 0 auto 30px;
     color: #ffffff;
-    border: 2px solid #00ffff;
+    border: 2px solid #00ffffac;
     border-radius: 20px;
     padding: 25px;
-    box-shadow: 0 0 30px #00ffff, 0 0 60px #8000ff inset;
+    box-shadow: 0 0 30px #00ffff88, 0 0 60px #8000ff9d inset;
     font-size: 1.1em;
     line-height: 1.6;
     text-align: center;
@@ -129,9 +134,9 @@ h1, h2 {
     right: -2px;
     bottom: -2px;
     background: linear-gradient(30deg, 
-        rgba(0, 255, 255, 0.5), 
-        rgba(0, 255, 0, 0.5), 
-        rgba(0, 255, 255, 0.5));
+        rgba(0, 255, 255, 0.217), 
+        rgba(0, 255, 0, 0.242), 
+        rgba(0, 255, 255, 0.235));
     background-size: 400%;
     z-index: -1;
     border-radius: 18px;
@@ -165,75 +170,6 @@ h1, h2 {
     0% { text-shadow: 0 0 15px #00ffff; }
     50% { text-shadow: 0 0 25px #00ffff, 0 0 10px #ffffff; }
     100% { text-shadow: 0 0 15px #00ffff; }
-}
-
-.ranking-box {
-    width: 95%;
-    max-width: 600px;
-    margin: 30px auto;
-    background: var(--table-bg);
-    color: var(--text-color);
-    border: var(--table-border);
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--secondary-color) inset;
-    box-sizing: border-box;
-}
-
-.ranking-scroll {
-    max-height: 400px;
-    overflow-y: auto;
-    border-radius: 10px;
-    margin-top: 15px;
-}
-
-.ranking-scroll::-webkit-scrollbar {
-    width: 6px;
-}
-
-.ranking-scroll::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-
-.ranking-scroll::-webkit-scrollbar-thumb {
-    background: var(--primary-color);
-    border-radius: 10px;
-}
-
-.ranking-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 16px;
-}
-
-.ranking-table th {
-    position: sticky;
-    top: 0;
-    background-color: #330066;
-    color: var(--primary-color);
-    text-shadow: 0 0 8px var(--primary-color);
-    padding: 15px;
-    text-align: left;
-    z-index: 1;
-}
-
-.ranking-table td {
-    padding: 12px 15px;
-    text-align: left;
-}
-
-.ranking-table tbody tr:nth-child(even) {
-    background-color: #290066;
-}
-
-.ranking-table tbody tr:nth-child(odd) {
-    background-color: #1f004d;
-}
-
-.ranking-table tbody tr:hover {
-    background-color: #3f007a;
-    box-shadow: inset 0 0 10px var(--primary-color);
 }
 
 footer {
@@ -274,6 +210,8 @@ footer {
 }
 
 .legendary-btn {
+    top: 40px;
+    font-family: "Bungee", sans-serif;
     position: relative;
     padding: 18px 36px;
     font-size: 1.5rem;
