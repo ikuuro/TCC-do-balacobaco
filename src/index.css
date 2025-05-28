@@ -54,52 +54,6 @@
   .floating {
     animation: float 6s ease-in-out infinite;
   }
-
-  .login-box {
-    @apply bg-[#0a2342] bg-opacity-95 rounded-lg shadow-lg p-8 w-full max-w-md;
-    background-color: #0a2342;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 25px 0 rgba(0,0,0,0.15);
-    padding: 2rem;
-    width: 100%;
-    max-width: 28rem;
-    opacity: 0.95;
-    color: #111;
-  }
-
-  .login-form {
-    @apply flex flex-col gap-4;
-  }
-
-  .login-input {
-    @apply p-2.5 rounded-md border border-[#d1d5db] outline-none transition-shadow duration-200;
-    color: #111;
-  }
-  .login-input:focus {
-    @apply shadow-[0_0_0_2px_#00FFFF] border-[#00FFFF];
-  }
-
-  .login-btn {
-    @apply bg-[#00FFFF] text-black font-bold py-2.5 rounded-md transition-colors duration-200 flex items-center justify-center gap-2;
-    border: none;
-    cursor: pointer;
-  }
-  .login-btn:hover {
-    @apply bg-[#39FF14];
-    color: #000;
-  }
-
-  .create-btn {
-    @apply w-full mt-4 bg-black bg-opacity-80 text-[#00FFFF] font-bold py-2.5 rounded-md border-none cursor-pointer transition-colors duration-200;
-  }
-  .create-btn:hover {
-    @apply bg-[#39FF14];
-    color: #000;
-  }
-
-  .login-error {
-    @apply text-red-600 mt-4 text-center;
-  }
 }
 
 .correct-answer {

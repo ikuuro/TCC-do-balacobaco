@@ -3,7 +3,7 @@ package projeto.tcc.skillcode.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="usuarios")
+@Table(name="Usuario")
 public class Usuario {
 
     @Id
@@ -13,6 +13,7 @@ public class Usuario {
     private String email;
     private String login;
     private String senha;
+    private String telefone;
     private Integer pontuacao;
 
     public Usuario(){}
@@ -24,12 +25,13 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public Usuario(Integer id, String nome, String email, String login, String senha, Integer pontuacao){
+    public Usuario(Integer id, String nome, String email, String login, String senha, String telefone, Integer pontuacao){
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.login = login;
         this.senha = senha;
+        this.telefone = telefone;
         this.pontuacao = pontuacao;
     }
 
@@ -71,6 +73,14 @@ public class Usuario {
     
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+    
+    public String getTelefone() {
+        return telefone;
+    }
+    
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
     
     public Integer getPontuacao() {
