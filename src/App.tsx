@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Star, Trophy, Zap } from 'lucide-react';
 import { LevelSelection } from './components/LevelSelection';
 import { Question } from './components/Question';
 import { GameOver } from './components/GameOver';
 import { questions } from './data/questions';
 import type { GameState } from './types/game';
-
-
-function inicio(){
-  window.location.href= './homepage/homepage.html'; 
-};
+import Login from './components/Login';
 
 function App() {
-  
+  const [user, setUser] = useState<any>(null);
   const [gameState, setGameState] = useState<GameState>({
     currentLevel: null,
     currentQuestionIndex: 0,
@@ -22,81 +18,47 @@ function App() {
     gameFinished: false,
   });
 
-  const [answers, setAnswers] = useState<(number | null)[]>([]);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
-  const [startTime, setStartTime] = useState<number | null>(null);
-  const [elapsedTime, setElapsedTime] = useState<number>(0);
-
-  const currentIndex = gameState.currentQuestionIndex;
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (gameState.gameStarted && !gameState.gameFinished) {
-      interval = setInterval(() => {
-        setElapsedTime(Date.now() - (startTime ?? Date.now()));
-      }, 1000);
-    } else {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [gameState.gameStarted, gameState.gameFinished, startTime]);
-
-  const formatTime = (milliseconds: number) => {
-    const totalSeconds = Math.floor(milliseconds / 1000);
-    const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
-    const seconds = (totalSeconds % 60).toString().padStart(2, '0');
-    return `${minutes}:${seconds}`;
-  };
+  const [showLogin, setShowLogin] = useState(false);
 
   const handleLevelSelect = (level: 'junior' | 'pleno' | 'senior') => {
-    const levelQuestions = questions.filter(q => q.level === level);
+    const levelQuestions = questions
+      .filter(q => q.level === level)
+      .map(q => ({
+        ...q,
+        options: [...q.options],
+      }));
     setGameState({
       ...gameState,
       currentLevel: level,
       questions: levelQuestions,
       gameStarted: true,
     });
-    setAnswers(Array(levelQuestions.length).fill(null));
-    setStartTime(Date.now());
-    setElapsedTime(0);
   };
 
   const handleAnswer = (answerIndex: number) => {
-    const currentQuestion = gameState.questions[currentIndex];
-    const updatedAnswers = [...answers];
-    updatedAnswers[currentIndex] = answerIndex;
-    setAnswers(updatedAnswers);
+    setSelectedAnswer(answerIndex);
+    setShowExplanation(true);
 
-    if (
-      answers[currentIndex] === null &&
-      answerIndex === currentQuestion.correctAnswer
-    ) {
+    const currentQuestion = gameState.questions[gameState.currentQuestionIndex];
+    if (answerIndex === currentQuestion.correctAnswer) {
       setGameState(prev => ({ ...prev, score: prev.score + 1 }));
     }
-
-    setShowExplanation(true);
   };
 
   const handleNextQuestion = () => {
-    if (currentIndex === gameState.questions.length - 1) {
+    if (gameState.currentQuestionIndex === gameState.questions.length - 1) {
       setGameState(prev => ({ ...prev, gameFinished: true }));
     } else {
       setGameState(prev => ({
         ...prev,
         currentQuestionIndex: prev.currentQuestionIndex + 1,
       }));
-      setShowExplanation(answers[currentIndex + 1] !== null);
     }
-  };
 
-  const handlePreviousQuestion = () => {
-    if (currentIndex > 0) {
-      setGameState(prev => ({
-        ...prev,
-        currentQuestionIndex: prev.currentQuestionIndex - 1,
-      }));
-      setShowExplanation(answers[currentIndex - 1] !== null);
-    }
+    setSelectedAnswer(null);
+    setShowExplanation(false);
   };
 
   const handleRestart = () => {
@@ -108,11 +70,13 @@ function App() {
       gameStarted: false,
       gameFinished: false,
     });
-    setAnswers([]);
+    setSelectedAnswer(null);
     setShowExplanation(false);
-    setStartTime(null);
-    setElapsedTime(0);
   };
+
+  if (showLogin || !user) {
+    return <Login onLogin={u => { setUser(u); setShowLogin(false); }} />;
+  }
 
   return (
     <div className="min-h-screen grid-background">
@@ -121,11 +85,15 @@ function App() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Zap className="w-10 h-10 text-[#00FFFF]" />
-              <button onClick={handleRestart}><h1 className="text-4xl font-bold neon-text">SkillCode</h1></button>
+              <h1 className="text-4xl font-bold neon-text">SkillCode</h1>
             </div>
-            <div className="flex items-center gap-3">
-              <button onClick={inicio}><h1 className='text-4x1 font-bold neon-text'>Ínicio</h1></button>
-            </div>
+            <button
+              className="px-4 py-2 rounded bg-[#00FFFF] text-black font-bold shadow hover:bg-[#39FF14] transition"
+              onClick={() => setShowLogin(true)}
+              style={{ marginLeft: 16 }}
+            >
+              Login
+            </button>
             {gameState.gameStarted && !gameState.gameFinished && (
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2">
@@ -133,10 +101,7 @@ function App() {
                   <span className="text-[#39FF14] font-bold">{gameState.score}</span>
                 </div>
                 <div className="text-gray-300">
-                  {currentIndex + 1} / {gameState.questions.length}
-                </div>
-                <div className="text-[#00FFFF] font-mono text-sm">
-                  ⏱️ {formatTime(elapsedTime)}
+                  {gameState.currentQuestionIndex + 1} / {gameState.questions.length}
                 </div>
               </div>
             )}
@@ -161,14 +126,13 @@ function App() {
 
         {gameState.gameStarted && !gameState.gameFinished && (
           <Question
-            question={gameState.questions[currentIndex]}
+            question={gameState.questions[gameState.currentQuestionIndex]}
             onAnswer={handleAnswer}
             showExplanation={showExplanation}
-            selectedAnswer={answers[currentIndex]}
-            currentQuestion={currentIndex + 1}
+            selectedAnswer={selectedAnswer}
+            currentQuestion={gameState.currentQuestionIndex + 1}
             totalQuestions={gameState.questions.length}
-            onNext={handleNextQuestion}
-            onPrevious={handlePreviousQuestion}
+            onNext={handleNextQuestion} // <- aqui está a mágica
           />
         )}
 
@@ -177,7 +141,6 @@ function App() {
             score={gameState.score}
             totalQuestions={gameState.questions.length}
             onRestart={handleRestart}
-            elapsedTime={Math.floor(elapsedTime / 1000)}
           />
         )}
       </main>
