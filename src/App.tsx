@@ -5,6 +5,7 @@ import { Question } from './components/Question';
 import { GameOver } from './components/GameOver';
 import { questions } from './data/questions';
 import type { GameState } from './types/game';
+
 import { JuniorIntro } from './components/JuniorIntro';
 import { PlenoIntro } from './components/PlenoIntro';
 import { SeniorIntro } from './components/SeniorIntro';
@@ -15,6 +16,12 @@ function inicio(){
 
 function App() {
   
+=======
+import Login from './components/Login';
+
+function App() {
+  const [user, setUser] = useState<any>(null);
+
   const [gameState, setGameState] = useState<GameState>({
     currentLevel: null,
     currentQuestionIndex: 0,
@@ -26,6 +33,7 @@ function App() {
 
   const [answers, setAnswers] = useState<(number | null)[]>([]);
   const [showExplanation, setShowExplanation] = useState(false);
+
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [showJuniorIntro, setShowJuniorIntro] = useState(false);
@@ -125,6 +133,17 @@ function App() {
 
   const startPlenoQuestions = () => {
     const levelQuestions = toMutableQuestions(questions.filter(q => q.level === 'pleno'));
+=======
+  const [showLogin, setShowLogin] = useState(false);
+
+  const handleLevelSelect = (level: 'junior' | 'pleno' | 'senior') => {
+    const levelQuestions = questions
+      .filter(q => q.level === level)
+      .map(q => ({
+        ...q,
+        options: [...q.options],
+      }));
+
     setGameState({
       ...gameState,
       currentLevel: 'pleno',
@@ -165,6 +184,18 @@ function App() {
     ) {
       setGameState(prev => ({ ...prev, score: prev.score + 1 }));
     }
+  };
+
+  const handleNextQuestion = () => {
+    if (gameState.currentQuestionIndex === gameState.questions.length - 1) {
+      setGameState(prev => ({ ...prev, gameFinished: true }));
+    } else {
+      setGameState(prev => ({
+        ...prev,
+        currentQuestionIndex: prev.currentQuestionIndex + 1,
+      }));
+    }
+
 
     setShowExplanation(true);
   };
@@ -189,6 +220,10 @@ function App() {
       }));
       setShowExplanation(answers[currentIndex - 1] !== null);
     }
+=======
+    setSelectedAnswer(null);
+    setShowExplanation(false);
+
   };
 
   const handleRestart = () => {
@@ -206,6 +241,10 @@ function App() {
     setElapsedTime(0);
   };
 
+  if (showLogin || !user) {
+    return <Login onLogin={u => { setUser(u); setShowLogin(false); }} />;
+  }
+
   return (
     <div className="min-h-screen grid-background">
       <header className="bg-black bg-opacity-50 backdrop-blur-sm border-b border-[#00FFFF]">
@@ -218,6 +257,13 @@ function App() {
             <div className="flex items-center gap-3">
               <button onClick={inicio}><h1 className='text-4x1 font-bold neon-text'>Ínicio</h1></button>
             </div>
+            <button
+              className="px-4 py-2 rounded bg-[#00FFFF] text-black font-bold shadow hover:bg-[#39FF14] transition"
+              onClick={() => setShowLogin(true)}
+              style={{ marginLeft: 16 }}
+            >
+              Login
+            </button>
             {gameState.gameStarted && !gameState.gameFinished && (
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2">
@@ -301,6 +347,7 @@ function App() {
             selectedAnswer={answers[currentIndex]}
             currentQuestion={currentIndex + 1}
             totalQuestions={gameState.questions.length}
+            onNext={handleNextQuestion} // <- aqui está a mágica
           />
         )}
 
