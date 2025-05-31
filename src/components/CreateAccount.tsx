@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const CreateAccount: React.FC<{ onAccountCreated: (user: any) => void, onBack: () => void }> = ({ onAccountCreated, onBack }) => {
+const CreateAccount: React.FC = () => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [login, setLogin] = useState('');
@@ -19,9 +19,7 @@ const CreateAccount: React.FC<{ onAccountCreated: (user: any) => void, onBack: (
         body: JSON.stringify({ nome, email, login, senha })
       });
       if (res.ok) {
-        const user = await res.json();
         setSuccess('Conta criada com sucesso!');
-        onAccountCreated(user);
       } else {
         setError('Erro ao criar conta.');
       }
@@ -47,16 +45,7 @@ const CreateAccount: React.FC<{ onAccountCreated: (user: any) => void, onBack: (
             className="login-input"
           />
           <button type="submit" className="login-btn">Criar Conta</button>
-          <button type="button" onClick={onBack} className="create-btn">Voltar</button>
         </form>
-        <a
-          href="/oauth2/authorization/google"
-          className="login-btn"
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', color: '#444', border: '1px solid #ccc', margin: '1rem 0 0 0', textAlign: 'center', fontWeight: 'bold' }}
-        >
-          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" style={{ width: 24, height: 24, marginRight: 12 }} />
-          Entrar com Google
-        </a>
         {error && <div className="login-error">{error}</div>}
         {success && <div style={{ color: '#39FF14', marginTop: 16, textAlign: 'center' }}>{success}</div>}
       </div>
