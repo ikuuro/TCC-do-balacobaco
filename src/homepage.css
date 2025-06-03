@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=VT323&display=swap');
+
+:root {
+    --primary-color: #00ffff;
+    --secondary-color: #8000ff;
+    --bg-gradient: linear-gradient(135deg, #080349, #2408c2);
+    --text-color: #ffffff;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Bungee', 'VT323', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0 0 60px 0;
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 40px 40px;
+    transition: all 0.3s ease;
+}
+
+body.scrolled header {
+    padding: 15px 0;
+    background: rgba(5, 6, 94, 0.904);
+    box-shadow: 0 2px 20px rgba(0, 255, 255, 0.3);
+}
+
+.navbar-content {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.logo {
+    filter: drop-shadow(0 0 30px #60c7ffcc);
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.container {
+    padding: 50px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px var(--primary-color);
+    font-family: 'Bungee', 'VT323', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2.5rem;
+}
+
+.sobre-box {
+    width: 85%;
+    margin: 0 auto 40px;
+    color: #ffffff;
+    border: 2px solid #00ffff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 0 30px #00ffff, 0 0 60px #8000ff inset;
+    font-size: 1.3em;
+    line-height: 1.8;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'VT323', 'Bungee', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.sobre-box p {
+    margin: 0 0 25px 0;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
+    font-size: 1.1em;
+}
+
+.sobre-box p:last-child {
+    margin-bottom: 0;
+    font-weight: bold;
+    color: #00ffff;
+    text-shadow: 0 0 15px #00ffff;
+    font-size: 1.4em;
+    margin-top: 20px;
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    0% { text-shadow: 0 0 15px #00ffff; }
+    50% { text-shadow: 0 0 25px #00ffff, 0 0 10px #ffffff; }
+    100% { text-shadow: 0 0 15px #00ffff; }
+}
+
+.botao-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.legendary-btn {
+    position: relative;
+    padding: 18px 36px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(45deg, #1a0033, #290066);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    display: block;
+    font-family: 'Bungee', 'VT323', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+}
+
+.glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, rgba(0, 255, 255, 0.7), rgba(255, 0, 255, 0.7), rgba(0, 255, 255, 0.7));
+    background-size: 200% 200%;
+    opacity: 0.5;
+    z-index: 1;
+    animation: gradientGlow 3s linear infinite;
+    border-radius: 50%;
+    filter: blur(20px);
+}
+
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1px);
+    background-size: 10px 10px;
+    z-index: 0;
+    opacity: 0.3;
+    animation: particleMove 10s linear infinite;
+}
+
+@keyframes gradientGlow {
+    0% {
+      transform: rotate(0deg);
+      background-position: 0% 50%;
+    }
+    100% {
+      transform: rotate(360deg);
+      background-position: 100% 50%;
+    }
+}
+
+@keyframes particleMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
+}
+
+.legendary-btn:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 60px rgba(255, 0, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.legendary-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 40px rgba(255, 0, 255, 0.8);
+}
+
+.botaoentrar {
+    margin-top: 10px;
+    padding: 14px 32px;
+    font-size: 1.2rem;
+    font-family: 'Bungee', 'VT323', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #00ffff;
+    color: #080349;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 0 10px #00ffff;
+    transition: all 0.3s;
+}
+
+.botaoentrar:hover {
+    background: #39FF14;
+    color: #1a0033;
+    box-shadow: 0 0 20px #39FF14;
+}
+
+footer {
+    padding: 15px;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.877);
+    text-align: center;
+    font-size: 0.9em;
+    grid-row: 3;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+}
+
+.footer-section h3 {
+    color: #00ffff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    font-size: 1.2em;
+    font-family: 'Bungee', 'VT323', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-section a {
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.footer-section a:hover {
+    color: #00ffff;
+    text-shadow: 0 0 8px #00ffff;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    font-size: 1.5em;
+    margin: 10px 0;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .navbar-content {
+        padding: 0 20px;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .sobre-box {
+        width: 95%;
+        padding: 20px;
+        min-height: 180px;
+        font-size: 1em;
+    }
+    .container {
+        padding: 20px 5px;
+    }
+    .botao-container {
+        gap: 10px;
+    }
+    footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

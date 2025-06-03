@@ -3,7 +3,11 @@ package projeto.tcc.skillcode.model;
 import jakarta.persistence.*;
 
 @Entity
+<<<<<<< HEAD
 @Table(name="usuarios")
+=======
+@Table(name="usuario")
+>>>>>>> 5dc94c7 (Alinhar backend, SQL e homepage React com tabela usuario e restaurar homepage.html)
 public class Usuario {
 
     @Id

@@ -35,7 +35,11 @@ public class UsuarioController {
 
     @PostMapping("/create")
     public ResponseEntity<Usuario> createAccount(@RequestBody Usuario usuario) {
+<<<<<<< HEAD
         String sql = "INSERT INTO usuarios (nome, email, login, senha) VALUES (?, ?, ?, SHA2(?, 256))";
+=======
+        String sql = "INSERT INTO usuario (nome, email, login, senha) VALUES (?, ?, ?, SHA2(?, 256))";
+>>>>>>> 5dc94c7 (Alinhar backend, SQL e homepage React com tabela usuario e restaurar homepage.html)
         jdbcTemplate.update(sql, usuario.getNome(), usuario.getEmail(), usuario.getLogin(), usuario.getSenha());
         List<Usuario> usuarios = repo.findByLogin(usuario.getLogin());
         if (!usuarios.isEmpty()) {
@@ -78,7 +82,11 @@ public class UsuarioController {
 
     @PostMapping("/login")
     public ResponseEntity<Usuario> login(@RequestBody Usuario loginRequest) {
+<<<<<<< HEAD
         String sql = "SELECT * FROM usuarios WHERE (login = ? OR email = ?) AND senha = SHA2(?, 256)";
+=======
+        String sql = "SELECT * FROM usuario WHERE (login = ? OR email = ?) AND senha = SHA2(?, 256)";
+>>>>>>> 5dc94c7 (Alinhar backend, SQL e homepage React com tabela usuario e restaurar homepage.html)
         List<Usuario> usuarios = jdbcTemplate.query(
             sql,
             (rs, rowNum) -> {

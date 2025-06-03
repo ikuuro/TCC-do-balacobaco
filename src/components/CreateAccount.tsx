@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
+<<<<<<< HEAD
 const CreateAccount: React.FC = () => {
+=======
+const CreateAccount: React.FC<{ onAccountCreated: (user: any) => void, onBack: () => void }> = ({ onAccountCreated, onBack }) => {
+>>>>>>> 5dc94c7 (Alinhar backend, SQL e homepage React com tabela usuario e restaurar homepage.html)
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [login, setLogin] = useState('');
@@ -19,7 +23,13 @@ const CreateAccount: React.FC = () => {
         body: JSON.stringify({ nome, email, login, senha })
       });
       if (res.ok) {
+<<<<<<< HEAD
         setSuccess('Conta criada com sucesso!');
+=======
+        const user = await res.json();
+        setSuccess('Conta criada com sucesso!');
+        onAccountCreated(user);
+>>>>>>> 5dc94c7 (Alinhar backend, SQL e homepage React com tabela usuario e restaurar homepage.html)
       } else {
         setError('Erro ao criar conta.');
       }
@@ -45,7 +55,20 @@ const CreateAccount: React.FC = () => {
             className="login-input"
           />
           <button type="submit" className="login-btn">Criar Conta</button>
+<<<<<<< HEAD
         </form>
+=======
+          <button type="button" onClick={onBack} className="create-btn">Voltar</button>
+        </form>
+        <a
+          href="/oauth2/authorization/google"
+          className="login-btn"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', color: '#444', border: '1px solid #ccc', margin: '1rem 0 0 0', textAlign: 'center', fontWeight: 'bold' }}
+        >
+          <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google" style={{ width: 24, height: 24, marginRight: 12 }} />
+          Entrar com Google
+        </a>
+>>>>>>> 5dc94c7 (Alinhar backend, SQL e homepage React com tabela usuario e restaurar homepage.html)
         {error && <div className="login-error">{error}</div>}
         {success && <div style={{ color: '#39FF14', marginTop: 16, textAlign: 'center' }}>{success}</div>}
       </div>
