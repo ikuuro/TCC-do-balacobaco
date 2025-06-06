@@ -17,10 +17,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-   background-color: #000;
-   background-image:
-    linear-gradient(0deg, rgba(0, 255, 255, 0.4) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.4) 1px, transparent 1px);
+   background-color: #141414;
+       background-image: url(fundo.gifSS);
     color: var(--text-color);
     min-height: 100vh;
     display: grid;
@@ -37,6 +35,10 @@ header {
     border-radius: 0 0 40px 40px;
     transition: all 0.3s ease;
 }
+
+/* main{
+    
+} */
 
 body.scrolled header {
     padding: 10px 0;
@@ -104,6 +106,7 @@ body.scrolled header {
     flex: 1;
     width: 100%;
     box-sizing: border-box;
+
 }
 
 h1, h2 {
@@ -120,7 +123,7 @@ h1, h2 {
     border: 2px solid #00ffffac;
     border-radius: 20px;
     padding: 25px;
-    box-shadow: 0 0 30px #00ffff88, 0 0 60px #8000ff9d inset;
+    box-shadow: 0 0 30px #00ffff3d, 0 0 60px #8000ff44 inset;
     font-size: 1.1em;
     line-height: 1.6;
     text-align: center;
@@ -140,10 +143,10 @@ h1, h2 {
     left: -2px;
     right: -2px;
     bottom: -2px;
-    background: linear-gradient(30deg, 
+    /* background: linear-gradient(30deg, 
         rgba(0, 255, 255, 0.217), 
         rgba(0, 255, 0, 0.242), 
-        rgba(0, 255, 255, 0.235));
+        rgba(0, 255, 255, 0.235)); */
     background-size: 400%;
     z-index: -1;
     border-radius: 18px;

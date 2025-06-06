@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillCode</title>
+  <link rel="stylesheet" href="usuario.css" />
+</head>
+
+<body>
+  <header>
+        <div class="navbar-content">
+            <a href="#" class="logo-link">
+                <img src="logotipo.png" alt="Logo SkillCode" class="logo" width="800">
+            </a>
+
+        </div>
+    </header>
+
+  <div class="container">
+    <aside class="sidebar">
+       <button class="profile">
+        <div class="avatar">👤</div>
+        <span>Seu Perfil</span>
+       </button>
+      <nav>
+        <a href="#">Cursos</a>
+        <a href="#">Amigos</a>
+        <a href="#">Conquistas</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="card">
+        <h2>JavaScript</h2>
+        <div class="score-section">
+          <div class="score">Pontuação: <span id="score">500 pts</span></div>
+          <div class="achievements">
+            <p>Conquistas</p>
+            <div class="grid">
+              <!-- Repita o emoji para representar conquistas -->
+              <span>🏆</span><span>🏆</span><span>🏆</span><span>🏆</span>
+              <span>🏆</span><span>🏆</span><span>🏆</span><span>🏆</span>
+              <span>🏆</span><span>🏆</span><span>🏆</span><span>🏆</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-bar">
+          <div id="progress" class="fill"></div>
+        </div>
+        <p class="percentage">39%</p>
+      </section>
+      <div class="ranking-box">
+        <h2>Ranking Geral</h2>
+        <div class="ranking-scroll">
+          <table class="ranking-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Pontuação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Amigo 01</td>
+                <td>800 pts</td>
+              </tr>
+              <tr>
+                <td>Amigo 02</td>
+                <td>750 pts</td>
+              </tr>
+              <tr>
+                <td>Amigo 03</td>
+                <td>740 pts</td>
+              </tr>
+              <tr>
+                <td>Amigo 04</td>
+                <td>710 pts</td>
+              </tr>
+              <tr>
+                <td>Amigo 05</td>
+                <td>690 pts</td>
+              </tr>
+              <tr>
+                <td>Amigo 06</td>
+                <td>660 pts</td>
+              </tr>
+              <tr>
+                <td>Amigo 07</td>
+                <td>640 pts</td>
+              </tr>
+              <tr>
+                <td>Amigo 08</td>
+                <td>600 pts</td>
+              </tr>
+              <tr>
+                <td>Amigo 09</td>
+                <td>580 pts</td>
+              </tr>
+              <tr>
+                <td>Amigo 10</td>
+                <td>550 pts</td>
+              </tr>
+              <tr>
+                <td>Amigo 11</td>
+                <td>520 pts</td>
+              </tr>
+              <tr>
+                <td>Amigo 12</td>
+                <td>500 pts</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    Footer
+  </footer>
+
+  <script src="script.js">
+    // JavaScript opcional para controle dinâmico, se desejar
+    // Exemplo: atualizar a barra de progresso dinamicamente
+    const score = 500;
+    const maxScore = 1300;
+    const percentage = Math.round((score / maxScore) * 100);
+    document.querySelector("#progress").style.width = percentage + "%";
+    document.querySelector(".percentage").textContent = percentage + "%";
+  </script>
+</body>
+s
+</html>
