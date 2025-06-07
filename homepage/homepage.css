@@ -17,7 +17,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-   background-color: #141414;
+   background-color: #070707;
        background-image: url(fundo.gifSS);
     color: var(--text-color);
     min-height: 100vh;
@@ -30,10 +30,12 @@ header {
     top: 0;
     z-index: 1000;
     padding: 15px 0;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.712);
     backdrop-filter: blur(10px);
     border-radius: 0 0 40px 40px;
     transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* main{
@@ -45,7 +47,7 @@ body.scrolled header {
     background: rgba(0, 0, 0, 0.457);
     box-shadow: 0 2px 20px rgba(0, 255, 255, 0.3);
 }
-
+/* 
 .navbar-content {
     width: 100%;
     max-width: 1400px;
@@ -55,7 +57,7 @@ body.scrolled header {
     align-items: center;
     padding: 0 20px;
     box-sizing: border-box;
-}
+} */
 
 .logo {
     display: flex;

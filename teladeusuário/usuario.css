@@ -13,14 +13,16 @@ body {
 }
 
 header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    padding: 15px 0;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 0 0 40px 40px;
-    transition: all 0.3s ease;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 0;
+  background: rgba(0, 0, 0, 0.712);
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 40px 40px;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -84,7 +86,7 @@ nav a:hover {
 .card {
   background: #1b0033;
   border: 1px solid #0ff;
-  box-shadow: 0 0 15px #0ff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.377);
   padding: 1.5rem;
   border-radius: 10px;
 }
@@ -150,19 +152,19 @@ nav a:hover {
   width: 90%;
   max-width: 1000px;
   margin: 30px auto;
-  background: linear-gradient(135deg, #1a0033, #290066);
+  background: linear-gradient(135deg, #1a003334, #2900662d);
   color: #ffffff;
   border: 2px solid #00ffff;
   border-radius: 15px;
   padding: 25px;
-  box-shadow: 0 0 20px #00ffff, 0 0 40px #8000ff inset;
+  box-shadow: 0 0 20px #00ffff49, 0 0 40px #8000ff3b inset;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .ranking-box h3 {
   font-size: 24px;
   color: #00ffff;
-  text-shadow: 0 0 10px #00ffff;
+  text-shadow: 0 0 10px #00ffff2d;
   margin-bottom: 15px;
 }
 
@@ -179,22 +181,22 @@ nav a:hover {
 }
 
 .ranking-box th {
-  background-color: #330066;
+  background-color: #3300663f;
   color: #00f7ff;
-  text-shadow: 0 0 8px #00f7ff;
+  text-shadow: 0 0 8px #00f7ff67;
 }
 
 .ranking-box tbody tr:nth-child(even) {
-  background-color: #290066;
+  background-color: #29006649;
 }
 
 .ranking-box tbody tr:nth-child(odd) {
-  background-color: #1f004d;
+  background-color: #1f004d48;
 }
 
 .ranking-box tbody tr:hover {
   background-color: #3f007a;
-  box-shadow: inset 0 0 10px #00ffff;
+  box-shadow: inset 0 0 10px #00ffff42;
 }
 
 footer {
